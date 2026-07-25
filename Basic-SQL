@@ -1,4 +1,4 @@
-# Write your MySQL query statement below
+-- ques 1: combine two tables --
 Select 
     firstname,
     lastname,
@@ -7,3 +7,10 @@ Select
 From Person p
 Left join Address a
 on p.personID = a.personID
+
+-- que-2: employee who earns more than their manager --
+SELECT e.name AS Employee
+FROM Employee e
+JOIN Employee m
+ON e.managerId = m.id
+WHERE e.salary > m.salary;
