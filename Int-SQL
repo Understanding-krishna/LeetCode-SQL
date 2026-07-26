@@ -1,1 +1,5 @@
-
+-- ques: higher temp compareed to previous date --
+SELECT w.id
+FROM Weather w
+JOIN weather n on w.recordDate = Date_ADD(n.recordDate, INTERVAL 1 DAY)
+WHERE w.temperature > n.temperature
