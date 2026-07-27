@@ -3,3 +3,14 @@ SELECT w.id
 FROM Weather w
 JOIN weather n on w.recordDate = Date_ADD(n.recordDate, INTERVAL 1 DAY)
 WHERE w.temperature > n.temperature
+
+-- ques: consecutive number across rows --
+SELECT DISTINCT num AS ConsecutiveNums
+FROM (
+    SELECT 
+        num,
+        LAG(num,1) over (ORDER BY id) AS previous1,
+        LAG(num,2) over (ORDER BY id) AS previous2
+    FROM Logs
+) t
+WHERE num = previous1 and num = previous2;
