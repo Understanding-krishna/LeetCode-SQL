@@ -23,3 +23,16 @@ FROM (
     DENSE_RANK() OVER (ORDER BY score DESC) AS "rank"
     FROM Scores
 ) t;
+
+-- ques: customers who never ordered --
+SELECT 
+    c.name as Customers
+FROM 
+    Customers c
+LEFT JOIN 
+    Orders o 
+    ON c.id = o.customerId
+GROUP BY
+    c.id
+HAVING 
+    count(o.id) = 0;
