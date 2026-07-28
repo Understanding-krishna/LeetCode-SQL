@@ -36,3 +36,12 @@ GROUP BY
     c.id
 HAVING 
     count(o.id) = 0;
+-- ques: report duplicate emails --
+SELECT 
+    email as Email
+From 
+    Person
+Group by 
+    email
+having 
+    count(Email) > 1;
