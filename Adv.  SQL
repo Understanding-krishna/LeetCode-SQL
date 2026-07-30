@@ -1,1 +1,19 @@
-
+-- ques: department top three unique salary --
+SELECT
+    Employee,
+    Department,
+    Salary
+FROM (
+    SELECT 
+        e.name as Employee,
+        e.salary as Salary,
+        d.name as Department,
+    Dense_rank() over(
+        partition by d.name
+        order by e.salary DESC
+        ) AS RNK
+    From Employee e
+    JOin Department d 
+        on e.departmentId = d.id
+) t
+Where RNK <= 3;
