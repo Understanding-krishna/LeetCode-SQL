@@ -45,3 +45,20 @@ Group by
     email
 having 
     count(Email) > 1;
+
+-- ques: delete dup emails --
+DELETE FROM Person
+Where id in (
+    select id
+    from (
+         SELECT 
+            id,
+            email,
+            Dense_rank() over(
+            Partition by email
+            order by id
+        ) as RNK
+        From Person
+    ) as temp
+    WHERE RNK > 1
+);
